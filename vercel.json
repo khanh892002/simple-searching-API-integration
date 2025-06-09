@@ -1,0 +1,18 @@
+{
+    "projects":[
+        {
+            "src": "client",
+            "use": "@vercel/static",
+            "routes": [
+                {
+                    "src": "/api/(.*)",
+                    "dest": "/api/$1.js"
+                }
+            ]
+        },
+        {
+            "src": "server/api",
+            "use": "@vercel/node"
+        }
+    ]
+}
