@@ -1,0 +1,65 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple google searching demo</title>
+</head>
+<body>
+    <input type="text" id="input"
+        placeholder="Search something..."
+        onchange="handleOnchangeInput(this.value)"/>
+        <div id="output"></div>
+        <button id="DownloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
+    <script>
+        let searchedResults = [];
+        const downloadBtn = document.getElementById("DownloadButton");
+
+        async function handleOnchangeInput(keyWord){
+            downloadBtn.disabled = true;
+            if (!keyWord) return;
+            // const url = `https://cors-anywhere.herokuapp.com/google.com/search?${search.replace(/\s+/g, '%20')}`;
+            // not stable, there is a rate limit, easily blocked
+            const apiKey = "54d8394b6b67e9971caa11d856c8ef673c65e48b4e468ea5fec1e1e7bf476279"
+            const url = `https://serpapi.com/search.json?engine=google&q=${keyWord}&api_key=${apiKey}`;
+            try {
+                const response = await fetch(url);
+                console.log("response ok");
+                const data = await response.json();
+                console.log("data ok")
+                searchedResults = (data.organic_results || []).map(item => ({
+                    title: item.title,
+                    link: item.link,
+                    snippet: item.snippet
+                }));
+
+                if (searchedResults.length === 0) return;
+
+                downloadBtn.disabled = false;
+                
+                const output = document.getElementById("output");
+                    
+                console.log(data);
+
+                searchedResults.forEach(item => {
+                    const p = document.createElement("p");
+                    p.innerHTML = item.title;
+                    output.appendChild(p);
+                })
+            } catch (error) {
+                document.getElementById("output").innerHTML = "Error";
+            }
+            
+        }
+
+        function downloadJSON() {
+            const blob = new Blob([JSON.stringify(searchedResults, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'search_results.json';
+            a.click();
+        }
+    </script>
+</body>
+</html>
