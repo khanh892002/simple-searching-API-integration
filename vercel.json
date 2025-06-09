@@ -1,18 +1,6 @@
 {
-    "projects":[
-        {
-            "src": "client",
-            "use": "@vercel/static",
-            "routes": [
-                {
-                    "src": "/api/(.*)",
-                    "dest": "/api/$1.js"
-                }
-            ]
-        },
-        {
-            "src": "server/api",
-            "use": "@vercel/node"
-        }
+    "redirects":[
+        //{ "source": "/","destination": "/client/index.html"},
+        { "source": "/api/(.*)", "destination": "/server/api/$1.js" }
     ]
 }
