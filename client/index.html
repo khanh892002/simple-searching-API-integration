@@ -9,8 +9,8 @@
     <input type="text" id="input"
         placeholder="Search something..."
         onchange="handleOnchangeInput(this.value)"/>
-        <div id="output"></div>
-        <button id="DownloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
+    <div id="output"></div>
+    <button id="DownloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
     <script>
         let searchedResults = [];
         const downloadBtn = document.getElementById("DownloadButton");
@@ -18,15 +18,12 @@
         async function handleOnchangeInput(keyWord){
             downloadBtn.disabled = true;
             if (!keyWord) return;
-            // const url = `https://cors-anywhere.herokuapp.com/google.com/search?${search.replace(/\s+/g, '%20')}`;
-            // not stable, there is a rate limit, easily blocked
-            const apiKey = "54d8394b6b67e9971caa11d856c8ef673c65e48b4e468ea5fec1e1e7bf476279"
-            const url = `https://serpapi.com/search.json?engine=google&q=${keyWord}&api_key=${apiKey}`;
+            
             try {
-                const response = await fetch(url);
-                console.log("response ok");
+                const response = await fetch(`/api/search?q=${encodeURIComponent(keyword)}`);
                 const data = await response.json();
-                console.log("data ok")
+                console.log(data);
+                
                 searchedResults = (data.organic_results || []).map(item => ({
                     title: item.title,
                     link: item.link,
@@ -38,9 +35,6 @@
                 downloadBtn.disabled = false;
                 
                 const output = document.getElementById("output");
-                    
-                console.log(data);
-
                 searchedResults.forEach(item => {
                     const p = document.createElement("p");
                     p.innerHTML = item.title;
