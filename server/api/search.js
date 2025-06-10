@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+
 const apiKey = "54d8394b6b67e9971caa11d856c8ef673c65e48b4e468ea5fec1e1e7bf476279";
 
 module.exports = async (req, res) => {
