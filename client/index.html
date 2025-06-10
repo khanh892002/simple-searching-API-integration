@@ -12,7 +12,7 @@
     <div id="output"></div>
     <button id="DownloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
     <script>
-        let searchedResults = [];
+        let organicResults = [];
 
         async function handleOnchangeInput(keyWord) {
             const downloadBtn = document.getElementById("DownloadButton");
@@ -23,26 +23,17 @@
 
             try {
                 const response = await fetch(`/api/search?q=${encodeURIComponent(keyWord)}`);
-
-                const data = await response.json();
-                console.log("data:")
-                console.log(data);
+                const organicResults = await response.json();
                 
-                if (data.error) throw data.error;
-
-                searchedResults = (data.organic_results || []).map(item => ({
-                    title: item.title,
-                    link: item.link,
-                    snippet: item.snippet
-                }));
+                if (organicResults.error) throw organicResults.error;
                 
-                if (searchedResults.length === 0) {
+                if (organicResults.length === 0) {
                     output.innerHTML = "No results found";
                     return;
                 }
                 downloadBtn.disabled = false;
                 
-                searchedResults.forEach(item => {
+                organicResults.forEach(item => {
                     const p = document.createElement("p");
                     p.innerHTML = item.title;
                     output.appendChild(p);
@@ -53,7 +44,7 @@
         }
 
         function downloadJSON() {
-            const blob = new Blob([JSON.stringify(searchedResults, null, 2)], {type: 'application/json'});
+            const blob = new Blob([JSON.stringify(organicResults, null, 2)], {type: 'application/json'});
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
