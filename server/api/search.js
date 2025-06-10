@@ -8,8 +8,11 @@ module.exports = async (req, res) => {
         const url = `https://serpapi.com/search.json?engine=google&q=${keyWord}&api_key=${apiKey}`;
         // const url = `https://cors-anywhere.herokuapp.com/google.com/search?${search.replace(/\s+/g, '%20')}`;
         // not stable, there is a rate limit, easily blocked
+        console.log("fetching from google");
         const response = await fetch(url);
+        console.log("finished fetching server side");
         const data = await response.json();
+        console.log(data);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({error: 'Failed to fetch from SerpAPI'});

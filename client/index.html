@@ -22,7 +22,9 @@
             if (!keyWord) return;
             
             try {
+                console.log("fetching");
                 const response = await fetch(`/api/search?q=${encodeURIComponent(keyWord)}`);
+                console.log(`finished fetching: status ${response.status}`)
                 const data = await response.json();
                 console.log(data);
                 
