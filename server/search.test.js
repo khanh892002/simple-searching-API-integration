@@ -15,7 +15,7 @@ test("empty input, return error status 400", async () => {
     const result = await testingSearch('');
     
     expect(result.status).toBe(400);
-    expect(results.data.length).toBe(0);
+    expect(result.data.length).toBe(0);
 });
 
 /*test("return no result", async () => {
