@@ -33,3 +33,4 @@ cd simple-searching-API-integration
 ```bash
 npm test
 ```
+At the moment, the tests only cover the normal and empty input cases. The function used to test the input and API fetching is just similar but not as same as the actual one in api folder.
