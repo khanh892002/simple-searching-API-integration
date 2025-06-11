@@ -27,8 +27,9 @@ This is a simple web application that allows users to enter a keyword, fetch org
 ```bash
 git clone https://github.com/khanh892002/simple-searching-API-integration.git
 cd simple-searching-API-integration
-
+```
 
 ### 2. Tests:
 ```bash
 npm test
+```
