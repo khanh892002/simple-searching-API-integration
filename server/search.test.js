@@ -11,6 +11,13 @@ test("return normal result, no errors", async () => {
     expect(results.data[0]).toHaveProperty('snippet');
 });
 
+test("empty input, return error status 400", async () => {
+    const result = await testingSearch('');
+    
+    expect(result.status).toBe(400);
+    expect(results.data.length).toBe(0);
+});
+
 /*test("return no result", async () => {
     const result = await testingSearch(`"3.141592653589793238462643383279502884197169399375107"`);
     // search for PI with a wrong digit

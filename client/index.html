@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Simple google searching demo</title>
 </head>
 <body>
@@ -34,9 +35,13 @@
                 downloadBtn.disabled = false;
                 
                 organicResults.forEach(item => {
-                    const p = document.createElement("p");
-                    p.innerHTML = item.title;
-                    output.appendChild(p);
+                    const a = document.createElement("a");
+                    a.innerHTML = `&bull; ${item.title}`;
+                    a.herf = item.link;
+                    a.target = "_blank"; // this make the link opened in a new tab
+                    a.rel = "noopener noreferrer"; // rel sets the relationship between our page and the linked url
+                    // set it like above prevents a type of phising called tabnabbing
+                    output.appendChild(a);
                 })
             } catch (error) {
                 output.innerHTML = `Error: ${error}`;

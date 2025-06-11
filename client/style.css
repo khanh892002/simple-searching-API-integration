@@ -1,0 +1,42 @@
+body {
+    background-color: #f7f7f7;
+    display: grid;
+    place-items: center;
+}
+
+#input, #output, #DownloadButton {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid;
+}
+
+#input, #output {
+    width: 50%;
+    background-color: #f9f9f9;
+    color: #e08c26;
+}
+
+#output {
+    display: grid;
+    place-items: left;
+}
+
+#output a {
+    padding: 5px;
+}
+
+#DownloadButton {
+    color: white;
+    background-color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#DownloadButton:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+#DownloadButton:active {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}
