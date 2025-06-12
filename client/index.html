@@ -37,7 +37,7 @@
                 organicResults.forEach(item => {
                     const a = document.createElement("a");
                     a.innerHTML = `&bull; ${item.title}`;
-                    a.herf = item.link;
+                    a.href = item.link;
                     a.target = "_blank"; // this make the link opened in a new tab
                     a.rel = "noopener noreferrer"; // rel sets the relationship between our page and the linked url
                     // set it like above prevents a type of phising called tabnabbing
