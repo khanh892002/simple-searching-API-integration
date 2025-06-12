@@ -32,7 +32,14 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-#DownloadButton:hover {
+#DownloadButton:disabled {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+#DownloadButton:hover:enabled {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-1px);
 }

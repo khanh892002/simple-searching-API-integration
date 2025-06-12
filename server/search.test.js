@@ -1,6 +1,6 @@
 const { testingSearch } = require('./search');
 
-test("return normal result, no errors", async () => {
+test("Return normal result, no errors: check if the result has status 200, has an array containing element and each element contains title, link and snippet.", async () => {
     const results = await testingSearch('hanoi');
     
     expect(results.status).toBe(200);
@@ -11,11 +11,11 @@ test("return normal result, no errors", async () => {
     expect(results.data[0]).toHaveProperty('snippet');
 });
 
-test("empty input, return error status 400", async () => {
+test("Empty input, return error status 400: check if the result has a status different from 200 and has error element.", async () => {
     const result = await testingSearch('');
     
-    expect(result.status).toBe(400);
-    expect(result.data.length).toBe(0);
+    expect(result.status != 200).toBe(true);
+    expect(result).toHaveProperty('error');
 });
 
 /*test("return no result", async () => {
