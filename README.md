@@ -23,11 +23,11 @@ This is a simple web application that allows users to enter a keyword, fetch org
 ## How to Run Locally
 
 if you want to change the code to make your own personal project:
-You can run the server using
+- You can run the server using
 ```bash
 npm start // which will run node backend/app.js on port 4000
 ```
-then change the url in fetch (in index.html) to http://localhost:4000/search...
+- And change the url in fetch (in index.html scripts) to http://localhost:4000/search... because the server was deploy onto Render to be able to run publicly on the internet
 
 ### 1. Clone the repository
 
