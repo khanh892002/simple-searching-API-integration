@@ -12,6 +12,7 @@
         onchange="handleOnchangeInput(this.value.trim())"/>
     <div id="output"></div>
     <button id="DownloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
+    <button onclick=CSSTest()>CSS test</button>
     <script>
         let organicResults = [];    
 
@@ -41,7 +42,13 @@
                     a.target = "_blank"; // this make the link opened in a new tab
                     a.rel = "noopener noreferrer"; // rel sets the relationship between our page and the linked url
                     // set it like above prevents a type of phising called tabnabbing
-                    output.appendChild(a);
+
+                    const p = document.createElement("p");
+                    p.innerHTML = item.snippet;
+
+                    const divRes = document.createElement("div");
+                    divRes.appendChild(a); divRes.appendChild(p);
+                    output.appendChild(divRes);
                 })
             } catch (error) {
                 output.innerHTML = error;

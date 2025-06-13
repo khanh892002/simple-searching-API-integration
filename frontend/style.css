@@ -21,7 +21,7 @@ body {
     place-items: left;
 }
 
-#output a {
+#output div a {
     padding: 5px;
 }
 
