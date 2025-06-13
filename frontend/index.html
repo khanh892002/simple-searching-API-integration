@@ -1,0 +1,61 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Simple google searching demo</title>
+</head>
+<body>
+    <input type="text" id="input"
+        placeholder="Search something..."
+        onchange="handleOnchangeInput(this.value.trim())"/>
+    <div id="output"></div>
+    <button id="DownloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
+    <script>
+        let organicResults = [];    
+
+        async function handleOnchangeInput(keyWord) {
+            const downloadBtn = document.getElementById("DownloadButton");
+            const output = document.getElementById("output");
+            downloadBtn.disabled = true;
+            output.innerHTML = '';
+            if (!keyWord) return;
+
+            try {
+                const response = await fetch(`/search?q=${encodeURIComponent(keyWord)}`);
+                const organicResults = await response.json();
+                
+                if (organicResults.error) throw organicResults.error;
+                
+                if (organicResults.length === 0) {
+                    output.innerHTML = "No results found";
+                    return;
+                }
+                downloadBtn.disabled = false;
+                
+                organicResults.forEach(item => {
+                    const a = document.createElement("a");
+                    a.innerHTML = `&bull; ${item.title}`;
+                    a.href = item.link;
+                    a.target = "_blank"; // this make the link opened in a new tab
+                    a.rel = "noopener noreferrer"; // rel sets the relationship between our page and the linked url
+                    // set it like above prevents a type of phising called tabnabbing
+                    output.appendChild(a);
+                })
+            } catch (error) {
+                output.innerHTML = error;
+            }
+        }
+
+        function downloadJSON() {
+            const blob = new Blob([JSON.stringify(organicResults, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'search_results.json';
+            a.click();
+        }
+    </script>
+</body>
+</html>

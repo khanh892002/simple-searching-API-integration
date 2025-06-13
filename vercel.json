@@ -1,7 +1,7 @@
 {
-    "outputDirectory": "client",
+    "outputDirectory": "frontend",
     "rewrites":[
-        { "source": "/", "destination": "/client/index.html"},
-        { "source": "/api/(.*)", "destination": "/api/$1" }
+        { "source": "/", "destination": "/frontend/index.html" },
+        { "source": "/search", "destination": "https:// /search" }
     ]
 }
