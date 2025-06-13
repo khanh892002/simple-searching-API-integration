@@ -2,7 +2,7 @@
   "scripts": [
     "start": "node backend/app.js",
     "test": "jest"
-  ]
+  ],
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",

@@ -23,7 +23,7 @@
             if (!keyWord) return;
 
             try {
-                const response = await fetch(`/search?q=${encodeURIComponent(keyWord)}`);
+                const response = await fetch(`https://simple-searching-api-integration.onrender.com/search?q=${encodeURIComponent(keyWord)}`);
                 const organicResults = await response.json();
                 
                 if (organicResults.error) throw organicResults.error;
