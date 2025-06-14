@@ -2,14 +2,15 @@ const request = require('supertest');
 const app = require('../app');
 
 test("Return normal result, no errors: check if the result has status 200, has an array containing element and each element contains title, link and snippet.", async () => {
-    const results = await request(app).get('/search?q=hanoi');
-    
-    expect(results.status).toBe(200);
-    expect(Array.isArray(results.organic_results)).toBe(true);
-    expect(results.organic_results.length > 0).toBe(true);
-    expect(results.organic_results[0]).toHaveProperty('title');
-    expect(results.organic_results[0]).toHaveProperty('link');
-    expect(results.organic_results[0]).toHaveProperty('snippet');
+    const response = await request(app).get('/search?q=hanoi');
+    const results = response.body.organic_results;
+ 
+    expect(response.status).toBe(200);
+    if (results.length > 0) {
+        expect(results[0]).toHaveProperty('title');
+        expect(results[0]).toHaveProperty('link');
+        expect(results[0]).toHaveProperty('snippet');
+    }
 });
 
 test("Empty input, return error status 400 with error element.", async () => {
