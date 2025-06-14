@@ -1,11 +1,12 @@
 {
   "scripts": {
-    "start": "node backend/app.js",
+    "start": "node backend/server.js",
     "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "jest": "^30.0.0"
+    "jest": "^30.0.0",
+    "supertest": "^7.1.1"
   }
 }
