@@ -11,13 +11,7 @@ module.exports = async (req, res) => {
         const response = await fetch(url);
         const data = await response.json();
         
-        res.status(200).json(
-            (data.organic_results || []).map(item => ({
-                title: item.title,
-                link: item.link,
-                snippet: item.snippet
-            }))
-        );
+        res.status(200).json(data);
     } catch (error) {
         res.status(500).json({error: 'Failed to fetch from SerpAPI'});
     }

@@ -5,11 +5,11 @@ test("Return normal result, no errors: check if the result has status 200, has a
     const results = await request(app).get('/search?q=hanoi');
     
     expect(results.status).toBe(200);
-    expect(Array.isArray(results.data)).toBe(true);
-    expect(results.data.length > 0).toBe(true);
-    expect(results.data[0]).toHaveProperty('title');
-    expect(results.data[0]).toHaveProperty('link');
-    expect(results.data[0]).toHaveProperty('snippet');
+    expect(Array.isArray(results.organic_results)).toBe(true);
+    expect(results.organic_results.length > 0).toBe(true);
+    expect(results.organic_results[0]).toHaveProperty('title');
+    expect(results.organic_results[0]).toHaveProperty('link');
+    expect(results.organic_results[0]).toHaveProperty('snippet');
 });
 
 test("Empty input, return error status 400 with error element.", async () => {
